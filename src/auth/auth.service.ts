@@ -82,7 +82,10 @@ export class AuthService {
   }
 
   async findOne(id: string) {
-    return await this.userModel.findById(id);
+    const user = await this.userModel.findById(id);
+    const {password, ...rest} = user.toJSON();
+
+    return rest;
   }
 
   getJwtToken(payload: JwtPayload) {
